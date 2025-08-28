@@ -5,7 +5,6 @@ import {
   FlatList,
   TouchableOpacity,
   View,
-  Button,
 } from 'react-native';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
@@ -91,12 +90,17 @@ export default function AddWorkoutScreen() {
       />
 
       {showCreateButton && (
-        <View style={styles.createButtonContainer}>
-          <Button
-            title={`Create and add "${searchQuery.trim()}"`}
+        <View
+          style={[styles.createButtonContainer, { borderColor: colors.icon }]}
+        >
+          <TouchableOpacity
+            style={[styles.button, { backgroundColor: colors.tint }]}
             onPress={() => handleAddExercise(searchQuery)}
-            color={colors.tint}
-          />
+          >
+            <ThemedText style={[styles.buttonText, { color: colors.background }]}>
+              {`Create and add "${searchQuery.trim()}"`}
+            </ThemedText>
+          </TouchableOpacity>
         </View>
       )}
     </ThemedView>
@@ -127,6 +131,13 @@ const styles = StyleSheet.create({
   createButtonContainer: {
     padding: 15,
     borderTopWidth: 1,
-    borderColor: '#ccc',
-  }
+  },
+  button: {
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontWeight: 'bold',
+  },
 });

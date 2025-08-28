@@ -6,7 +6,6 @@ import {
   Text,
   FlatList,
   SafeAreaView,
-  Button,
   Alert,
 } from 'react-native';
 import { ThemedView } from '@/components/ThemedView';
@@ -114,12 +113,15 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.exportContainer}>
-            <Button
-              title={isSubmitting ? "Getting Suggestions..." : "Get Weight Suggestions"}
-              onPress={handleGetSuggestions}
-              color={colors.tint}
-              disabled={isSubmitting}
-            />
+          <TouchableOpacity
+            style={[styles.button, { backgroundColor: colors.tint }]}
+            onPress={handleGetSuggestions}
+            disabled={isSubmitting}
+          >
+            <ThemedText style={[styles.buttonText, { color: colors.background }]}>
+              {isSubmitting ? "Getting Suggestions..." : "Get Weight Suggestions"}
+            </ThemedText>
+          </TouchableOpacity>
         </View>
 
         <FlatList
@@ -139,7 +141,7 @@ export default function HomeScreen() {
           style={[styles.fab, { backgroundColor: colors.tint }]}
           onPress={handleAddWorkout}
         >
-          <Text style={styles.fabText}>+</Text>
+          <Text style={[styles.fabText, { color: colors.background }]}>+</Text>
         </TouchableOpacity>
       </ThemedView>
     </SafeAreaView>
@@ -157,8 +159,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingHorizontal: 30,
+    paddingVertical: 15,
     borderBottomWidth: 1,
   },
   arrowButton: {
@@ -209,6 +211,13 @@ const styles = StyleSheet.create({
   fabText: {
     fontSize: 30,
     lineHeight: 30,
-    color: 'white',
+  },
+  button: {
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontWeight: 'bold',
   },
 });
